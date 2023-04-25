@@ -108,7 +108,8 @@ defmodule AshAuthentication.Phoenix.Components.Password.RegisterForm do
         method="POST"
         class={override_for(@overrides, :form_class)}
       >
-        <Input.identity_field strategy={@strategy} form={form} overrides={@overrides} />
+        <Input.identity_field identity_field={:handle} label="Username" strategy={@strategy} form={form} overrides={@overrides} />
+        <Input.identity_field strategy={@strategy} form={form} overrides={@overrides} focus="false" />
         <Input.password_field strategy={@strategy} form={form} overrides={@overrides} />
 
         <%= if @strategy.confirmation_required? do %>

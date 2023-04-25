@@ -41,29 +41,40 @@ defmodule AshAuthentication.Phoenix.Components.Password.Input do
     * `strategy` - The configuration map as per
       `AshAuthentication.authenticated_resources/1`.
       Required.
+    * `identity_field` - The field to use for this input. Defaults to the
+      identity field configured in the strategy.
     * `form` - An `AshPhoenix.Form`.
       Required.
     * `input_type` - Either `:text` or `:email`.
       If not set it will try and guess based on the name of the identity field.
     * `overrides` - A list of override modules.
+    * `focus` - Whether to focus the input field.
+      Defaults to `true`.
   """
   @spec identity_field(%{
           required(:socket) => Socket.t(),
           required(:strategy) => Strategy.t(),
           required(:form) => Form.t(),
+          optional(:identity_field) => atom(),
           optional(:input_type) => :text | :email,
-          optional(:overrides) => [module]
+          optional(:overrides) => [module],
+          optional(:focus) => String.t(),
+          optional(:label) => String.t(),
         }) :: Rendered.t() | no_return
   def identity_field(assigns) do
-    identity_field = assigns.strategy.identity_field
-
     assigns =
       assigns
       |> assign_new(:overrides, fn -> [AshAuthentication.Phoenix.Overrides.Default] end)
+      |> assign_new(:identity_field, fn ->
+        assigns.strategy.identity_field
+      end)
+
+    identity_field = assigns.identity_field
 
     assigns =
       assigns
-      |> assign(:identity_field, identity_field)
+      |> assign_new(:label, fn -> nil end)
+      |> assign_new(:focus, fn -> "true" end)
       |> assign_new(:input_type, fn ->
         identity_field
         |> to_string()
@@ -83,12 +94,17 @@ defmodule AshAuthentication.Phoenix.Components.Password.Input do
 
     ~H"""
     <div class={override_for(@overrides, :field_class)}>
-      <%= label(@form, @identity_field, class: override_for(@overrides, :label_class)) %>
+      <%= if is_nil(@label) do
+            label(@form, @identity_field, class: override_for(@overrides, :label_class))
+          else
+            label(@form, @identity_field, @label, class: override_for(@overrides, :label_class))
+          end
+      %>
       <%= text_input(@form, @identity_field,
         type: to_string(@input_type),
         class: @input_class,
         phx_debounce: override_for(@overrides, :input_debounce),
-        autofocus: "true"
+        autofocus: @focus
       ) %>
       <.error form={@form} field={@identity_field} overrides={@overrides} />
     </div>
