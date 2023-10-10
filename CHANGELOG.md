@@ -5,6 +5,62 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.8.5](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.8.4...v1.8.5) (2023-10-06)
+
+
+
+
+### Bug Fixes:
+
+* properly navigate back to root component when routes are not set (#296)
+
+## [v1.8.4](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.8.3...v1.8.4) (2023-10-01)
+
+
+
+
+### Improvements:
+
+* optional support for routing to register & reset links (#281)
+
+## [v1.8.3](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.8.2...v1.8.3) (2023-09-23)
+
+
+
+
+### Bug Fixes:
+
+* resettable is no longer a list
+
+## [v1.8.2](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.8.1...v1.8.2) (2023-09-22)
+
+
+
+
+### Bug Fixes:
+
+* handle change from ash_authentication where resettable is no lonâ¦ (#279)
+
+## [v1.8.1](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.8.0...v1.8.1) (2023-09-18)
+
+
+
+
+### Improvements:
+
+* submit form in-line when sign_in_tokens_enabled (#274)
+
+* submit form in-line when sign_in_tokens_enabled
+
+## [v1.8.0](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.7.3...v1.8.0) (2023-09-14)
+
+
+
+
+### Features:
+
+* change `ash_authentication_live_session` to use `assign_new` (#270)
+
 ## [v1.7.3](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.7.2...v1.7.3) (2023-08-09)
 
 

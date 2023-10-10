@@ -58,6 +58,7 @@ We can make our life easier and the code more consistent by adding formatters to
     :phoenix,
     # add these lines -->
     :ash,
+    :ash_authentication,
     :ash_authentication_phoenix,
     :ash_postgres
     # <-- add these lines
@@ -166,11 +167,6 @@ import Config
 # add these lines -->
 config :example,
   ash_apis: [Example.Accounts]
-
-config :ash,
-  :use_all_identities_in_manage_relationship?, false
-# <-- add these lines
-
 # ...
 ```
 
@@ -203,6 +199,7 @@ At the end we should have the following directory structure:
 lib/example
 ├── accounts
 |   ├── accounts.ex
+|   ├── secrets.ex
 |   └── resources
 │       ├── token.ex
 |       └── user.ex
@@ -307,13 +304,22 @@ end
 
 ```elixir
 defmodule Example.Accounts do
-    use Ash.Api
+  use Ash.Api
 
-    resources do
-      resource Example.Accounts.User
-      resource Example.Accounts.Token
-    end
+  resources do
+    resource Example.Accounts.User
+    resource Example.Accounts.Token
+  end
 end
+```
+
+### Add to config
+
+Although mentioned in a step at the top, a common mistake here is not to add the new api into your `ash_apis` config in `config/config.exs`. It should look like this:
+
+```elixir
+config :example,
+  ash_apis: [..., Example.Accounts]
 ```
 
 ### Create and Migration
@@ -364,7 +370,9 @@ defmodule ExampleWeb.Router do
     get "/", PageController, :home
 
     # add these lines -->
-    sign_in_route()
+    # Leave out `register_path` and `reset_path` if you don't want to support
+    # user registration and/or password resets respectively.
+    sign_in_route(register_path: "/register", reset_path: "/reset")
     sign_out_route AuthController
     auth_routes_for Example.Accounts.User, to: AuthController
     reset_route []
@@ -415,7 +423,7 @@ Generated example app
 
 While running `mix phx.routes` you probably saw the warning message that the `ExampleWeb.AuthController.init/1 is undefined`. Let's fix that by creating a new controller:
 
-**lib/my_app_web/controllers/auth_controller.ex**
+**lib/example_web/controllers/auth_controller.ex**
 
 ```elixir
 defmodule ExampleWeb.AuthController do
@@ -530,6 +538,11 @@ To see how the authentication works we replace the default Phoenix `home.html.ee
   </main>
 </div>
 ```
+
+### If you are using LiveView
+
+If you are using LiveView, jump over to the [Use AshAuthentication with LiveView](/documentation/tutorials/use-ash-authentication-with-liveview.md)
+section and set up your LiveView routes for `AshAuthentication`. Once that is done, you can proceed with the following steps.
 
 ### Start Phoenix
 
@@ -647,7 +660,3 @@ end
 ```
 
 Your new reset password functionality is active. Visit [`localhost:4000/sign-in`](http://localhost:4000/sign-in) with your browser and click on the `Forgot your password?` link to trigger the reset password workflow.
-
-# Next up
-
-- [Use AshAuthentication with LiveView](/documentation/tutorials/use-ash-authentication-with-liveview.md)

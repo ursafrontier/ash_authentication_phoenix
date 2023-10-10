@@ -2,7 +2,7 @@ defmodule AshAuthentication.Phoenix.MixProject do
   @moduledoc false
   use Mix.Project
 
-  @version "1.7.3"
+  @version "1.8.5"
 
   def project do
     [
@@ -26,6 +26,21 @@ defmodule AshAuthentication.Phoenix.MixProject do
         extras: extra_documentation(),
         groups_for_extras: extra_documentation_groups(),
         formatters: ["html"],
+        before_closing_head_tag: fn type ->
+          if type == :html do
+            """
+            <script>
+              if (location.hostname === "hexdocs.pm") {
+                var script = document.createElement("script");
+                script.src = "https://plausible.io/js/script.js";
+                script.setAttribute("defer", "defer")
+                script.setAttribute("data-domain", "ashhexdocs")
+                document.head.appendChild(script);
+              }
+            </script>
+            """
+          end
+        end,
         filter_modules: ~r/^Elixir.AshAuthentication.Phoenix/,
         source_url_pattern:
           "https://github.com/team-alembic/ash_authentication_phoenix/blob/main/%{path}#L%{line}",
@@ -113,7 +128,7 @@ defmodule AshAuthentication.Phoenix.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ash_authentication, "~> 3.10"},
+      {:ash_authentication, "~> 3.11 and >= 3.11.9"},
       {:ash_phoenix, "~> 1.1"},
       {:ash, "~> 2.2"},
       {:jason, "~> 1.0"},
@@ -126,7 +141,7 @@ defmodule AshAuthentication.Phoenix.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false},
       {:doctor, "~> 0.18", only: [:dev, :test]},
-      {:ex_doc, "~> 0.23", only: :dev, runtime: false},
+      {:ex_doc, github: "elixir-lang/ex_doc", only: [:dev, :test], runtime: false},
       {:faker, "~> 0.17", only: [:dev, :test]},
       {:git_ops, "~> 2.4", only: [:dev, :test], runtime: false},
       {:mimic, "~> 1.7", only: [:dev, :test]},
@@ -144,7 +159,7 @@ defmodule AshAuthentication.Phoenix.MixProject do
         "hex.audit",
         "test"
       ],
-      docs: ["docs", "ash.replace_doc_links"]
+      docs: ["docs", "spark.replace_doc_links"]
     ]
   end
 
