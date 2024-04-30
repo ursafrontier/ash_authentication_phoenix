@@ -1,7 +1,8 @@
 defmodule DevWeb.ErrorHelpers do
   @moduledoc false
 
-  use Phoenix.HTML
+  import Phoenix.HTML.Form
+  use PhoenixHTMLHelpers
 
   @doc """
   Generates tag for inlined form input errors.

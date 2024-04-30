@@ -24,11 +24,12 @@ defmodule AshAuthentication.Phoenix.Components.Password.Input do
   #{AshAuthentication.Phoenix.Overrides.Overridable.generate_docs()}
   """
 
-  use Phoenix.Component
+  use AshAuthentication.Phoenix.Web, :component
   alias AshAuthentication.Strategy
   alias AshPhoenix.Form
   alias Phoenix.LiveView.{Rendered, Socket}
   import Phoenix.HTML.Form
+  import PhoenixHTMLHelpers.Form
 
   @doc """
   Generate a form field for the configured identity field.
@@ -221,8 +222,7 @@ defmodule AshAuthentication.Phoenix.Components.Password.Input do
     * `form` - An `AshPhoenix.Form`.  Required.
     * `action` - Either `:sign_in` or `:register`.  Required.
     * `label` - The text to show in the submit label.  Generated from the
-      configured action name (via `Phoenix.HTML.Form.humanize/1`) if not
-      supplied.
+      configured action name (via `Phoenix.Naming.humanize/1`) if not supplied.
     * `overrides` - A list of override modules.
   """
   @spec submit(%{

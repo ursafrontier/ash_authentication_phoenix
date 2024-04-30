@@ -30,13 +30,13 @@ defmodule AshAuthentication.Phoenix.Components.Password.RegisterForm do
   #{AshAuthentication.Phoenix.Overrides.Overridable.generate_docs()}
   """
 
-  use Phoenix.LiveComponent
+  use AshAuthentication.Phoenix.Web, :live_component
 
   alias AshAuthentication.{Info, Phoenix.Components.Password.Input, Strategy}
   alias AshPhoenix.Form
   alias Phoenix.LiveView.{Rendered, Socket}
 
-  import Phoenix.HTML.Form
+  import PhoenixHTMLHelpers.Form
   import AshAuthentication.Phoenix.Components.Helpers
   import Slug
 
@@ -53,7 +53,7 @@ defmodule AshAuthentication.Phoenix.Components.Password.RegisterForm do
   def update(assigns, socket) do
     strategy = assigns.strategy
 
-    api = Info.authentication_api!(strategy.resource)
+    api = Info.authentication_domain!(strategy.resource)
     subject_name = Info.authentication_subject_name!(strategy.resource)
 
     form =

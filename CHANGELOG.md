@@ -5,6 +5,80 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v2.0.0-rc.2](https://github.com/team-alembic/ash_authentication_phoenix/compare/v2.0.0-rc.1...v2.0.0-rc.2) (2024-04-13)
+
+
+
+
+### Bug Fixes:
+
+* show password strategy message if `field` is `nil`
+
+## [v2.0.0-rc.1](https://github.com/team-alembic/ash_authentication_phoenix/compare/v2.0.0-rc.0...v2.0.0-rc.1) (2024-04-02)
+### Breaking Changes:
+
+* Update to support Ash 3.0, et al.
+
+
+
+### Bug Fixes:
+
+* loosen rc requirements
+
+* Fix typos in override class names
+
+* honour the error field in AuthenticationFailed errors in forms. (#368)
+
+* Ensure that `sign_in_route` and `reset_route` correctly initialise session. (#369)
+
+## [v2.0.0-rc.0](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.9.4...v2.0.0-rc.0) (2024-04-01)
+### Breaking Changes:
+
+* Update to support Ash 3.0, et al.
+
+
+
+## [v1.9.4](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.9.3...v1.9.4) (2024-03-06)
+
+
+
+
+### Bug Fixes:
+
+* Fix typos in override class names
+
+## [v1.9.3](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.9.2...v1.9.3) (2024-03-05)
+
+
+
+
+### Bug Fixes:
+
+* Fix typos in override class names
+
+## [v1.9.2](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.9.1...v1.9.2) (2024-02-02)
+
+
+
+
+### Bug Fixes:
+
+* Ensure that `sign_in_route` and `reset_route` correctly initialise session. (#369)
+
+## [v1.9.1](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.9.0...v1.9.1) (2024-01-21)
+
+
+
+
+## [v1.9.0](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.8.7...v1.9.0) (2023-11-13)
+
+
+
+
+### Features:
+
+* Add rendering of flash messages from live components
+
 ## [v1.8.7](https://github.com/team-alembic/ash_authentication_phoenix/compare/v1.8.6...v1.8.7) (2023-10-26)
 
 
